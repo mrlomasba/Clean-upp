@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clean Up - Servicios de Limpieza Profesional</title>
+    <!-- Carga de Tailwind CSS (se mantiene aquí por ser un CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- ENLACE AL ARCHIVO CSS EXTERNO -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="text-gray-800">
+
+    <!-- Encabezado y Navegación -->
+    <header class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo/Nombre -->
+                <a href="#" class="text-3xl font-extrabold text-blue-600 tracking-tight">
+                    Clean Up
+                </a>
+
+                <!-- Menú Desktop -->
+                <nav class="hidden md:flex space-x-8">
+                    <a href="#inicio" class="text-gray-600 hover:text-blue-600 transition duration-300 font-medium">Inicio</a>
+                    <a href="#servicios" class="text-gray-600 hover:text-blue-600 transition duration-300 font-medium">Servicios</a>
+                    <a href="#nosotros" class="text-gray-600 hover:text-blue-600 transition duration-300 font-medium">Nosotros</a>
+                    <a href="#contacto" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-300 shadow-md">Cotizar Ahora</a>
+                </nav>
+
+                <!-- Botón de Menú Móvil -->
+                <button id="mobile-menu-button" class="md:hidden text-gray-600 hover:text-blue-600 p-2 rounded-md transition duration-300 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Menú Móvil Desplegable (Inicialmente oculto) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100">
+            <div class="pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#inicio" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-blue-50">Inicio</a>
+                <a href="#servicios" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-blue-50">Servicios</a>
+                <a href="#nosotros" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-blue-50">Nosotros</a>
+                <a href="#contacto" class="block px-3 py-2 rounded-md text-base font-medium bg-blue-500 text-white hover:bg-blue-600 mt-2">Cotizar Ahora</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Sección Principal (Héroe) -->
+        <section id="inicio" class="bg-blue-600 text-white py-20 md:py-32 shadow-xl">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h1 class="text-4xl sm:text-6xl font-extrabold mb-4 leading-tight">
+                    Tu Espacio, Impecable. <span class="block text-blue-200">El Poder de Clean Up.</span>
+                </h1>
+                <p class="text-xl sm:text-2xl mb-8 font-light max-w-3xl mx-auto">
+                    Ofrecemos soluciones de limpieza profesional, confiables y ecológicas para hogares y empresas.
+                </p>
+                <a href="#contacto" class="inline-block px-10 py-4 bg-white text-blue-600 text-lg font-bold rounded-full hover:bg-gray-100 transition duration-300 transform hover:scale-105 shadow-lg">
+                    Solicita tu Cotización Gratis
+                </a>
+            </div>
+        </section>
+
+        <!-- Sección de Servicios -->
+        <section id="servicios" class="py-16 md:py-24 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-4xl font-extrabold text-center mb-4 text-gray-800">Nuestros Servicios</h2>
+                <p class="text-xl text-center text-gray-500 mb-12 max-w-2xl mx-auto">
+                    Adaptamos nuestros planes a tus necesidades, garantizando resultados brillantes.
+                </p>
+
+                <div class="grid md:grid-cols-3 gap-8">
+                    <!-- Tarjeta de Servicio 1: Residencial -->
+                    <div class="bg-gray-50 p-6 rounded-xl shadow-lg hover:shadow-2xl transition duration-500 transform hover:-translate-y-1 border-t-4 border-blue-500">
+                        <div class="text-blue-600 mb-4">
+                            <!-- Icono de Casa (SVG inline) -->
+                            <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 001-1h3m-6 0h-2"></path></svg>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3 text-gray-800">Limpieza Residencial</h3>
+                        <p class="text-gray-600">
+                            Servicio de limpieza profunda o regular para tu hogar. Dejamos cada rincón reluciente para que disfrutes más de tu tiempo libre.
+                        </p>
+                        <ul class="mt-4 text-sm text-gray-700 space-y-1">
+                            <li>• Limpieza de cocinas y baños</li>
+                            <li>• Aspirado y trapeado de pisos</li>
+                            <li>• Desempolvado de superficies</li>
+                        </ul>
+                    </div>
+
+                    <!-- Tarjeta de Servicio 2: Comercial -->
+                    <div class="bg-gray-50 p-6 rounded-xl shadow-lg hover:shadow-2xl transition duration-500 transform hover:-translate-y-1 border-t-4 border-blue-500">
+                        <div class="text-blue-600 mb-4">
+                            <!-- Icono de Oficina (SVG inline) -->
+                            <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h10m0 14h2"></path></svg>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3 text-gray-800">Limpieza Comercial</h3>
+                        <p class="text-gray-600">
+                            Mantenemos tu oficina, local o negocio con una imagen profesional. Servicios nocturnos y fines de semana disponibles.
+                        </p>
+                        <ul class="mt-4 text-sm text-gray-700 space-y-1">
+                            <li>• Mantenimiento de áreas comunes</li>
+                            <li>• Limpieza de cristales y fachadas</li>
+                            <li>• Gestión de residuos y reciclaje</li>
+                        </ul>
+                    </div>
+
+                    <!-- Tarjeta de Servicio 3: Profunda -->
+                    <div class="bg-gray-50 p-6 rounded-xl shadow-lg hover:shadow-2xl transition duration-500 transform hover:-translate-y-1 border-t-4 border-blue-500">
+                        <div class="text-blue-600 mb-4">
+                            <!-- Icono de Gota (SVG inline) -->
+                            <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3 text-gray-800">Limpieza Profunda / Post-Obra</h3>
+                        <p class="text-gray-600">
+                            Ideal para mudanzas, eventos especiales o después de una construcción. Eliminamos hasta la suciedad más persistente.
+                        </p>
+                        <ul class="mt-4 text-sm text-gray-700 space-y-1">
+                            <li>• Limpieza de alfombras y tapicería</li>
+                            <li>• Tratamiento de pisos especializados</li>
+                            <li>• Desinfección completa de áreas</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección Nosotros -->
+        <section id="nosotros" class="py-16 md:py-24 bg-blue-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="md:flex md:items-center md:space-x-12">
+                    <div class="md:w-1/2 mb-8 md:mb-0">
+                        <!-- Placeholder de Imagen -->
+                        <img src="https://placehold.co/800x600/1e40af/ffffff?text=Equipo+Clean+Up" 
+                             alt="Equipo de Limpieza Profesional Clean Up" 
+                             class="rounded-xl shadow-2xl w-full h-auto object-cover"
+                             onerror="this.onerror=null;this.src='https://placehold.co/800x600/1e40af/ffffff?text=Equipo+Clean+Up';"
+                        >
+                    </div>
+                    <div class="md:w-1/2">
+                        <h2 class="text-4xl font-extrabold mb-4 text-gray-800 border-b-4 border-blue-500 pb-2 inline-block">¿Por Qué Elegir Clean Up?</h2>
+                        <p class="text-lg text-gray-600 mb-6">
+                            En Clean Up, creemos que la limpieza es más que solo quitar el polvo. Es mejorar tu calidad de vida, crear ambientes saludables y liberarte de una tarea. Somos un equipo apasionado, comprometido con la excelencia y el uso de productos amigables con el medio ambiente.
+                        </p>
+                        <ul class="space-y-4">
+                            <li class="flex items-start">
+                                <span class="text-blue-600 mr-3 mt-1">&#10003;</span>
+                                <p class="text-gray-700"><strong class="font-semibold">Personal de Confianza:</strong> Todo nuestro equipo está capacitado, asegurado y verificado.</p>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-blue-600 mr-3 mt-1">&#10003;</span>
+                                <p class="text-gray-700"><strong class="font-semibold">Compromiso Ecológico:</strong> Utilizamos productos biodegradables que protegen tu salud y el planeta.</p>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-blue-600 mr-3 mt-1">&#10003;</span>
+                                <p class="text-gray-700"><strong class="font-semibold">Garantía de Satisfacción:</strong> Si no estás satisfecho, regresamos a corregirlo sin costo.</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Sección de Contacto y Cotización -->
+        <section id="contacto" class="py-16 md:py-24 bg-white">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-4xl font-extrabold text-center mb-4 text-gray-800">Solicita tu Cotización</h2>
+                <p class="text-xl text-center text-gray-500 mb-12">
+                    Cuéntanos sobre tus necesidades y te enviaremos una propuesta personalizada en 24 horas.
+                </p>
+
+                <form id="quote-form" class="bg-gray-50 p-8 rounded-xl shadow-2xl border border-gray-100">
+                    <div class="grid md:grid-cols-2 gap-6 mb-6">
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-gray-700 mb-2">Nombre Completo</label>
+                            <input type="text" id="name" name="name" required class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                        <div>
+                            <label for="phone" class="block text-sm font-medium text-gray-700 mb-2">Teléfono</label>
+                            <input type="tel" id="phone" name="phone" required class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                    </div>
+                    <div class="mb-6">
+                        <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Correo Electrónico</label>
+                        <input type="email" id="email" name="email" required class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                    </div>
+                    <div class="mb-6">
+                        <label for="service_type" class="block text-sm font-medium text-gray-700 mb-2">Tipo de Servicio Requerido</label>
+                        <select id="service_type" name="service_type" required class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 bg-white appearance-none">
+                            <option value="">Selecciona una opción</option>
+                            <option value="residencial">Limpieza Residencial</option>
+                            <option value="comercial">Limpieza Comercial</option>
+                            <option value="profunda">Limpieza Profunda / Post-Obra</option>
+                            <option value="otro">Otro</option>
+                        </select>
+                    </div>
+                    <div class="mb-8">
+                        <label for="details" class="block text-sm font-medium text-gray-700 mb-2">Detalles Adicionales (Tamaño, frecuencia, etc.)</label>
+                        <textarea id="details" name="details" rows="4" required class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"></textarea>
+                    </div>
+                    
+                    <button type="submit" class="w-full px-4 py-4 bg-blue-600 text-white font-bold text-lg rounded-lg hover:bg-blue-700 transition duration-300 transform hover:scale-[1.01] shadow-xl">
+                        Enviar Solicitud
+                    </button>
+                    
+                    <!-- Contenedor para mensajes del formulario -->
+                    <div id="form-message" class="mt-4 p-4 rounded-lg hidden text-center font-semibold"></div>
+                </form>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Pie de Página -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-xl font-bold mb-4">Clean Up</p>
+            <nav class="space-x-4 mb-4">
+                <a href="#inicio" class="text-gray-400 hover:text-white transition duration-300">Inicio</a>
+                <a href="#servicios" class="text-gray-400 hover:text-white transition duration-300">Servicios</a>
+                <a href="#nosotros" class="text-gray-400 hover:text-white transition duration-300">Nosotros</a>
+                <a href="#contacto" class="text-gray-400 hover:text-white transition duration-300">Contacto</a>
+            </nav>
+            <p class="text-gray-400 text-sm">&copy; 2024 Clean Up. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- ENLACE AL ARCHIVO JAVASCRIPT EXTERNO -->
+    <script src="script.js"></script>
+
+</body>
+</html>
