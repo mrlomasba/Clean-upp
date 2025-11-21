@@ -4,156 +4,259 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clean Up - Servicios de Limpieza Profesional</title>
-    <!-- Carga de Tailwind CSS (se mantiene aquí por ser un CDN) -->
+    <!-- Carga de Tailwind CSS (CDN) -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- ENLACE AL ARCHIVO CSS EXTERNO -->
-    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Bloque de CSS Personalizado y Variables de Tema (Separación Lógica de Estilos) -->
+    <style>
+        /* Configuración de la fuente global */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+            transition: background-color 0.3s, color 0.3s; /* Transición para un cambio suave de tema */
+        }
+        
+        /* Estilos base del tema (Claro) */
+        .theme-bg-hero { background-color: #1d4ed8; } /* blue-700 */
+        .theme-text-hero { color: #93c5fd; } /* blue-300 */
+        .theme-bg-alt { background-color: #eff6ff; } /* blue-50 */
+        .theme-border-accent { border-color: #3b82f6; } /* blue-500 */
+        .theme-text-accent { color: #3b82f6; } /* blue-500 */
+
+        /* Estilos para el cambio a Tema Oscuro (Clase 'dark' en el <html>) */
+        html.dark body {
+            background-color: #1f2937; /* Gray-800 */
+            color: #f3f4f6; /* Gray-100 */
+        }
+
+        html.dark .theme-bg-hero { background-color: #111827; } /* gray-900 oscuro */
+        html.dark .theme-text-hero { color: #9ca3af; } /* gray-400 */
+        html.dark .theme-bg-alt { background-color: #374151; } /* gray-700 oscuro */
+        html.dark .theme-border-accent { border-color: #60a5fa; } /* blue-400 */
+        html.dark .theme-text-accent { color: #60a5fa; } /* blue-400 */
+        
+        html.dark .bg-white { background-color: #374151; } /* Reemplaza el blanco */
+        html.dark .shadow-lg { box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -2px rgba(0, 0, 0, 0.4); }
+        html.dark .text-gray-800 { color: #f3f4f6; }
+        html.dark .text-gray-600 { color: #d1d5db; }
+        html.dark .text-gray-700 { color: #e5e7eb; }
+        html.dark .text-gray-500 { color: #9ca3af; }
+        html.dark .bg-gray-50 { background-color: #1f2937; }
+        
+        /* Estilos de fondo para la sección de Líneas (Ajuste de opacidad en modo oscuro) */
+        .product-background {
+            background-image: url('productoslimpieza.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+    </style>
 </head>
-<body class="text-gray-800">
+<body class="text-gray-800 bg-gray-50">
 
     <!-- Encabezado y Navegación -->
-    <header class="bg-white shadow-lg sticky top-0 z-50">
+    <header class="bg-white theme-bg-hero-light shadow-lg sticky top-0 z-50 transition duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
                 <!-- Logo/Nombre -->
-                <a href="#" class="text-3xl font-extrabold text-blue-600 tracking-tight">
+                <a href="#inicio" class="text-3xl font-extrabold theme-text-accent tracking-tight">
                     Clean Up
                 </a>
 
-                <!-- Menú Desktop -->
-                <nav class="hidden md:flex space-x-8">
-                    <a href="#inicio" class="text-gray-600 hover:text-blue-600 transition duration-300 font-medium">Inicio</a>
-                    <a href="#servicios" class="text-gray-600 hover:text-blue-600 transition duration-300 font-medium">Servicios</a>
-                    <a href="#nosotros" class="text-gray-600 hover:text-blue-600 transition duration-300 font-medium">Nosotros</a>
-                    <a href="#contacto" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-300 shadow-md">Cotizar Ahora</a>
+                <!-- Menú Desktop y Botón de Tema -->
+                <nav class="flex items-center space-x-4 md:space-x-8">
+                    <!-- Botón de Cambio de Tema -->
+                    <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition duration-300 focus:outline-none">
+                        <!-- Icono de Sol/Luna (se cambia con JS) -->
+                        <svg id="theme-icon" class="w-6 h-6 theme-text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                    </button>
+                    
+                    <div class="hidden md:flex space-x-8">
+                        <a href="#inicio" class="text-gray-600 dark:text-gray-300 hover:text-blue-600 transition duration-300 font-medium">Inicio</a>
+                        <a href="#productos-destacados" class="text-gray-600 dark:text-gray-300 hover:text-blue-600 transition duration-300 font-medium">Productos</a>
+                        <a href="#nosotros" class="text-gray-600 dark:text-gray-300 hover:text-blue-600 transition duration-300 font-medium">Nosotros</a>
+                        <a href="#lineas" class="text-gray-600 dark:text-gray-300 hover:text-blue-600 transition duration-300 font-medium">Líneas</a>
+                        <a href="#horarios" class="text-gray-600 dark:text-gray-300 hover:text-blue-600 transition duration-300 font-medium">Horarios</a>
+                        <!-- ENLACE A WHATSAPP (Desktop) -->
+                        <a href="https://wa.me/5218180123046?text=Hola%2C%20me%20gustar%C3%ADa%20solicitar%20una%20cotizaci%C3%B3n%20de%20limpieza%20para%20mi%20propiedad.%20%C2%BFPodr%C3%ADan%20ayudarme%3F" target="_blank" class="whatsapp-cta px-4 py-2 bg-green-500 text-white rounded-lg font-bold hover:bg-green-600 transition duration-300 shadow-lg">Cotizar/Comprar</a>
+                    </div>
                 </nav>
 
                 <!-- Botón de Menú Móvil -->
-                <button id="mobile-menu-button" class="md:hidden text-gray-600 hover:text-blue-600 p-2 rounded-md transition duration-300 focus:outline-none">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                <button id="mobile-menu-button" class="md:hidden text-gray-600 dark:text-gray-300 hover:text-blue-600 p-2 rounded-md transition duration-300 focus:outline-none">
+                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
                 </button>
             </div>
         </div>
 
         <!-- Menú Móvil Desplegable (Inicialmente oculto) -->
-        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100">
-            <div class="pt-2 pb-3 space-y-1 sm:px-3">
-                <a href="#inicio" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-blue-50">Inicio</a>
-                <a href="#servicios" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-blue-50">Servicios</a>
-                <a href="#nosotros" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-blue-50">Nosotros</a>
-                <a href="#contacto" class="block px-3 py-2 rounded-md text-base font-medium bg-blue-500 text-white hover:bg-blue-600 mt-2">Cotizar Ahora</a>
+        <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-gray-800 border-t border-gray-100 dark:border-gray-700 shadow-xl transition duration-300">
+            <div class="pt-2 pb-3 space-y-1 px-4">
+                <a href="#inicio" class="block px-3 py-2 rounded-lg text-base font-medium text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-700 transition duration-200">Inicio</a>
+                <a href="#productos-destacados" class="block px-3 py-2 rounded-lg text-base font-medium text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-700 transition duration-200">Productos</a>
+                <a href="#nosotros" class="block px-3 py-2 rounded-lg text-base font-medium text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-700 transition duration-200">Nosotros</a>
+                <a href="#lineas" class="block px-3 py-2 rounded-lg text-base font-medium text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-700 transition duration-200">Líneas</a>
+                <a href="#horarios" class="block px-3 py-2 rounded-lg text-base font-medium text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-700 transition duration-200">Horarios</a>
+                <!-- ENLACE A WHATSAPP (Móvil) -->
+                <a href="https://wa.me/5218180123046?text=Hola%2C%20me%20gustar%C3%ADa%20solicitar%20una%20cotizaci%C3%B3n%20de%20limpieza%20para%20mi%20propiedad.%20%C2%BFPodr%C3%ADan%20ayudarme%3F" target="_blank" class="block px-3 py-2 mt-2 rounded-lg text-base font-bold bg-green-500 text-white hover:bg-green-600 transition duration-200 text-center">Cotizar/Comprar</a>
             </div>
         </div>
     </header>
 
     <main>
         <!-- Sección Principal (Héroe) -->
-        <section id="inicio" class="bg-blue-600 text-white py-20 md:py-32 shadow-xl">
+        <section id="inicio" class="theme-bg-hero text-white py-20 md:py-32 shadow-2xl transition duration-300">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
                 <h1 class="text-4xl sm:text-6xl font-extrabold mb-4 leading-tight">
-                    Tu Espacio, Impecable. <span class="block text-blue-200">El Poder de Clean Up.</span>
+                    Tu Espacio, Impecable. <span class="block theme-text-hero transition duration-300">El Poder de Clean Up.</span>
                 </h1>
                 <p class="text-xl sm:text-2xl mb-8 font-light max-w-3xl mx-auto">
                     Ofrecemos soluciones de limpieza profesional, confiables y ecológicas para hogares y empresas.
                 </p>
-                <a href="#contacto" class="inline-block px-10 py-4 bg-white text-blue-600 text-lg font-bold rounded-full hover:bg-gray-100 transition duration-300 transform hover:scale-105 shadow-lg">
+                <!-- ENLACE PRINCIPAL A WHATSAPP -->
+                <a href="https://wa.me/5218180123046?text=Hola%2C%20me%20gustar%C3%ADa%20solicitar%20una%20cotizaci%C3%B3n%20de%20limpieza%20para%20mi%20propiedad.%20%C2%BFPodr%C3%ADan%20ayudarme%3F" target="_blank" class="inline-block px-10 py-4 bg-white text-blue-700 text-lg font-bold rounded-full hover:bg-gray-100 transition duration-300 transform hover:scale-105 shadow-xl">
                     Solicita tu Cotización Gratis
                 </a>
+                
+                <p class="mt-6 text-blue-300 dark:text-gray-400 text-sm md:text-base">
+                    O contáctanos por email: 
+                    <a href="mailto:clean.upp@outlook.com" class="text-white dark:text-gray-200 font-semibold hover:underline">clean.upp@outlook.com</a>
+                </p>
             </div>
         </section>
 
-        <!-- Sección de Servicios -->
-        <section id="servicios" class="py-16 md:py-24 bg-white">
+        <!-- Sección de Productos Destacados -->
+        <section id="productos-destacados" class="py-16 md:py-24 bg-white dark:bg-gray-800 transition duration-300">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <h2 class="text-4xl font-extrabold text-center mb-4 text-gray-800">Nuestros Servicios</h2>
-                <p class="text-xl text-center text-gray-500 mb-12 max-w-2xl mx-auto">
-                    Adaptamos nuestros planes a tus necesidades, garantizando resultados brillantes.
+                <h2 class="text-4xl font-extrabold text-center mb-4 text-gray-800 dark:text-white">Catálogo de Productos Destacados</h2>
+                <p class="text-xl text-center text-gray-500 dark:text-gray-400 mb-12 max-w-2xl mx-auto">
+                    Descubre nuestra línea de productos de limpieza, formulados para resultados profesionales y el cuidado de tu espacio.
                 </p>
 
                 <div class="grid md:grid-cols-3 gap-8">
-                    <!-- Tarjeta de Servicio 1: Residencial -->
-                    <div class="bg-gray-50 p-6 rounded-xl shadow-lg hover:shadow-2xl transition duration-500 transform hover:-translate-y-1 border-t-4 border-blue-500">
-                        <div class="text-blue-600 mb-4">
-                            <!-- Icono de Casa (SVG inline) -->
-                            <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 001-1h3m-6 0h-2"></path></svg>
+                    
+                    <!-- Tarjeta de Producto 1: Productos para el Hogar -->
+                    <div class="bg-gray-50 dark:bg-gray-700 p-6 rounded-xl shadow-lg hover:shadow-2xl transition duration-500 transform hover:-translate-y-1 border-b-4 theme-border-accent">
+                        <div class="theme-text-accent mb-4 transition duration-300">
+                            <!-- Icono de Casa -->
+                            <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-10v10a1 1 0 01-1 1h-3m-6 0a1 1 0 00-1 1v3m0 0a1 1 0 001 1h2a1 1 0 001-1v-3m0-6h.01"></path></svg>
                         </div>
-                        <h3 class="text-2xl font-bold mb-3 text-gray-800">Limpieza Residencial</h3>
-                        <p class="text-gray-600">
-                            Servicio de limpieza profunda o regular para tu hogar. Dejamos cada rincón reluciente para que disfrutes más de tu tiempo libre.
+                        <h3 class="text-2xl font-bold mb-3 text-gray-800 dark:text-white">Productos para el Hogar</h3>
+                        <p class="text-gray-600 dark:text-gray-300">
+                            Fórmulas seguras y efectivas para el cuidado diario de tu casa. Limpieza profunda y aroma agradable en cada aplicación.
                         </p>
-                        <ul class="mt-4 text-sm text-gray-700 space-y-1">
-                            <li>• Limpieza de cocinas y baños</li>
-                            <li>• Aspirado y trapeado de pisos</li>
-                            <li>• Desempolvado de superficies</li>
+                        <ul class="mt-4 text-sm text-gray-700 dark:text-gray-200 space-y-1">
+                            <li class="flex items-center">
+                                <span class="theme-text-accent mr-2">&bull;</span> Limpiavidrios sin rayas
+                            </li>
+                            <li class="flex items-center">
+                                <span class="theme-text-accent mr-2">&bull;</span> Desinfectante multiusos
+                            </li>
+                            <li class="flex items-center">
+                                <span class="theme-text-accent mr-2">&bull;</span> Detergentes concentrados
+                            </li>
                         </ul>
+                        <div class="mt-6 text-center">
+                            <!-- ENLACE A WHATSAPP -->
+                            <a href="https://wa.me/5218180123046?text=Hola%2C%20estoy%20interesado%2Finteresada%20en%20los%20Productos%20para%20el%20Hogar%20de%20Clean%20Up.%20%C2%BFPueden%20darme%20m%C3%A1s%20informaci%C3%B3n%3F" target="_blank" class="text-green-500 font-bold hover:text-green-600 transition duration-300 flex justify-center items-center">
+                                Comprar Ahora 
+                                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                            </a>
+                        </div>
                     </div>
 
-                    <!-- Tarjeta de Servicio 2: Comercial -->
-                    <div class="bg-gray-50 p-6 rounded-xl shadow-lg hover:shadow-2xl transition duration-500 transform hover:-translate-y-1 border-t-4 border-blue-500">
-                        <div class="text-blue-600 mb-4">
-                            <!-- Icono de Oficina (SVG inline) -->
-                            <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h10m0 14h2"></path></svg>
+                    <!-- Tarjeta de Producto 2: Línea Industrial -->
+                    <div class="bg-gray-50 dark:bg-gray-700 p-6 rounded-xl shadow-lg hover:shadow-2xl transition duration-500 transform hover:-translate-y-1 border-b-4 theme-border-accent">
+                        <div class="theme-text-accent mb-4 transition duration-300">
+                            <!-- Icono de Fábrica/Industria -->
+                            <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m4 0h5m-9 0v-4a2 2 0 012-2h2a2 2 0 012 2v4"></path></svg>
                         </div>
-                        <h3 class="text-2xl font-bold mb-3 text-gray-800">Limpieza Comercial</h3>
-                        <p class="text-gray-600">
-                            Mantenemos tu oficina, local o negocio con una imagen profesional. Servicios nocturnos y fines de semana disponibles.
+                        <h3 class="text-2xl font-bold mb-3 text-gray-800 dark:text-white">Línea Industrial / Mayorista</h3>
+                        <p class="text-gray-600 dark:text-gray-300">
+                            Productos de alto rendimiento y gran formato (galones, bidones), ideales para negocios, restaurantes y grandes superficies.
                         </p>
-                        <ul class="mt-4 text-sm text-gray-700 space-y-1">
-                            <li>• Mantenimiento de áreas comunes</li>
-                            <li>• Limpieza de cristales y fachadas</li>
-                            <li>• Gestión de residuos y reciclaje</li>
+                        <ul class="mt-4 text-sm text-gray-700 dark:text-gray-200 space-y-1">
+                            <li class="flex items-center">
+                                <span class="theme-text-accent mr-2">&bull;</span> Desengrasantes de cocina potentes
+                            </li>
+                            <li class="flex items-center">
+                                <span class="theme-text-accent mr-2">&bull;</span> Jabón líquido para manos (galón)
+                            </li>
+                            <li class="flex items-center">
+                                <span class="theme-text-accent mr-2">&bull;</span> Cera para pisos de alto tráfico
+                            </li>
                         </ul>
+                        <div class="mt-6 text-center">
+                            <!-- ENLACE A WHATSAPP -->
+                            <a href="https://wa.me/5218180123046?text=Hola%2C%20estoy%20interesado%2Finteresada%20en%20la%20L%C3%ADnea%20Industrial%20de%20Clean%20Up%20y%20sus%20precios%20de%20mayoreo.%20%C2%BFPueden%20ayudarme%3F" target="_blank" class="text-green-500 font-bold hover:text-green-600 transition duration-300 flex justify-center items-center">
+                                Comprar Ahora
+                                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                            </a>
+                        </div>
                     </div>
 
-                    <!-- Tarjeta de Servicio 3: Profunda -->
-                    <div class="bg-gray-50 p-6 rounded-xl shadow-lg hover:shadow-2xl transition duration-500 transform hover:-translate-y-1 border-t-4 border-blue-500">
-                        <div class="text-blue-600 mb-4">
-                            <!-- Icono de Gota (SVG inline) -->
-                            <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                    <!-- Tarjeta de Producto 3: Especializados y Ecológicos -->
+                    <div class="bg-gray-50 dark:bg-gray-700 p-6 rounded-xl shadow-lg hover:shadow-2xl transition duration-500 transform hover:-translate-y-1 border-b-4 theme-border-accent">
+                        <div class="theme-text-accent mb-4 transition duration-300">
+                            <!-- Icono de Hoja/Ecología -->
+                            <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.121 2.121m-2.121-2.121L5.979 5.979m16 0l-2.121 2.121m2.121-2.121L18.021 5.979m-7.001 8.847l-1.414 1.414M10 16.5v2M14 16.5v2m-4-6l-4-4m8 0l-4 4m0 0l-4-4"></path></svg>
                         </div>
-                        <h3 class="text-2xl font-bold mb-3 text-gray-800">Limpieza Profunda / Post-Obra</h3>
-                        <p class="text-gray-600">
-                            Ideal para mudanzas, eventos especiales o después de una construcción. Eliminamos hasta la suciedad más persistente.
+                        <h3 class="text-2xl font-bold mb-3 text-gray-800 dark:text-white">Especializados y Ecológicos</h3>
+                        <p class="text-gray-600 dark:text-gray-300">
+                            Soluciones específicas y amigables con el medio ambiente para materiales delicados y alta desinfección.
                         </p>
-                        <ul class="mt-4 text-sm text-gray-700 space-y-1">
-                            <li>• Limpieza de alfombras y tapicería</li>
-                            <li>• Tratamiento de pisos especializados</li>
-                            <li>• Desinfección completa de áreas</li>
+                        <ul class="mt-4 text-sm text-gray-700 dark:text-gray-200 space-y-1">
+                            <li class="flex items-center">
+                                <span class="theme-text-accent mr-2">&bull;</span> Quitamanchas para tapicería
+                            </li>
+                            <li class="flex items-center">
+                                <span class="theme-text-accent mr-2">&bull;</span> Limpiadores biodegradables
+                            </li>
+                            <li class="flex items-center">
+                                <span class="theme-text-accent mr-2">&bull;</span> Pulidor para acero inoxidable
+                            </li>
                         </ul>
+                        <div class="mt-6 text-center">
+                            <!-- ENLACE A WHATSAPP -->
+                            <a href="https://wa.me/5218180123046?text=Hola%2C%20estoy%20interesado%2Finteresada%20en%20los%20productos%20Ecol%C3%B3gicos%2Fespecializados%20de%20Clean%20Up.%20%C2%BFPueden%20ayudarme%3F" target="_blank" class="text-green-500 font-bold hover:text-green-600 transition duration-300 flex justify-center items-center">
+                                Comprar Ahora
+                                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Sección Nosotros -->
-        <section id="nosotros" class="py-16 md:py-24 bg-blue-50">
+        <section id="nosotros" class="py-16 md:py-24 theme-bg-alt transition duration-300">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="md:flex md:items-center md:space-x-12">
                     <div class="md:w-1/2 mb-8 md:mb-0">
-                        <!-- Placeholder de Imagen -->
-                        <img src="https://placehold.co/800x600/1e40af/ffffff?text=Equipo+Clean+Up" 
+                        <!-- Placeholder de Imagen con color de la marca -->
+                        <img src="https://placehold.co/800x600/3b82f6/ffffff?text=Equipo+Clean+Up" 
                              alt="Equipo de Limpieza Profesional Clean Up" 
                              class="rounded-xl shadow-2xl w-full h-auto object-cover"
-                             onerror="this.onerror=null;this.src='https://placehold.co/800x600/1e40af/ffffff?text=Equipo+Clean+Up';"
+                             onerror="this.onerror=null;this.src='https://placehold.co/800x600/3b82f6/ffffff?text=Equipo+Clean+Up';"
                         >
                     </div>
                     <div class="md:w-1/2">
-                        <h2 class="text-4xl font-extrabold mb-4 text-gray-800 border-b-4 border-blue-500 pb-2 inline-block">¿Por Qué Elegir Clean Up?</h2>
-                        <p class="text-lg text-gray-600 mb-6">
+                        <h2 class="text-4xl font-extrabold mb-4 text-gray-800 dark:text-white border-b-4 theme-border-accent pb-2 inline-block transition duration-300">¿Por Qué Elegir Clean Up?</h2>
+                        <p class="text-lg text-gray-600 dark:text-gray-300 mb-6">
                             En Clean Up, creemos que la limpieza es más que solo quitar el polvo. Es mejorar tu calidad de vida, crear ambientes saludables y liberarte de una tarea. Somos un equipo apasionado, comprometido con la excelencia y el uso de productos amigables con el medio ambiente.
                         </p>
                         <ul class="space-y-4">
                             <li class="flex items-start">
-                                <span class="text-blue-600 mr-3 mt-1">&#10003;</span>
-                                <p class="text-gray-700"><strong class="font-semibold">Personal de Confianza:</strong> Todo nuestro equipo está capacitado, asegurado y verificado.</p>
+                                <span class="theme-text-accent text-2xl mr-3 mt-0.5 transition duration-300">&#10003;</span>
+                                <p class="text-gray-700 dark:text-gray-200"><strong class="font-semibold">Fórmulas Profesionales:</strong> Todos nuestros productos están desarrollados para un rendimiento superior.</p>
                             </li>
                             <li class="flex items-start">
-                                <span class="text-blue-600 mr-3 mt-1">&#10003;</span>
-                                <p class="text-gray-700"><strong class="font-semibold">Compromiso Ecológico:</strong> Utilizamos productos biodegradables que protegen tu salud y el planeta.</p>
+                                <span class="theme-text-accent text-2xl mr-3 mt-0.5 transition duration-300">&#10003;</span>
+                                <p class="text-gray-700 dark:text-gray-200"><strong class="font-semibold">Compromiso Ecológico:</strong> Contamos con una línea de productos biodegradables que protegen tu salud y el planeta.</p>
                             </li>
                             <li class="flex items-start">
-                                <span class="text-blue-600 mr-3 mt-1">&#10003;</span>
-                                <p class="text-gray-700"><strong class="font-semibold">Garantía de Satisfacción:</strong> Si no estás satisfecho, regresamos a corregirlo sin costo.</p>
+                                <span class="theme-text-accent text-2xl mr-3 mt-0.5 transition duration-300">&#10003;</span>
+                                <p class="text-gray-700 dark:text-gray-200"><strong class="font-semibold">Venta Mayorista y Menudeo:</strong> Precios especiales para distribuidores y grandes consumidores.</p>
                             </li>
                         </ul>
                     </div>
@@ -161,51 +264,124 @@
             </div>
         </section>
         
-        <!-- Sección de Contacto y Cotización -->
-        <section id="contacto" class="py-16 md:py-24 bg-white">
+        <!-- Sección de Líneas -->
+        <section id="lineas" class="py-16 md:py-24 bg-gray-900 product-background relative overflow-hidden transition duration-300">
+            <div class="absolute inset-0 bg-gray-900 opacity-80 dark:opacity-90 transition duration-300"></div>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 text-white">
+                <h2 class="text-4xl sm:text-5xl font-extrabold mb-4 text-white">Nuestras Líneas de Productos</h2>
+                <p class="text-xl text-gray-300 mb-12 max-w-3xl mx-auto">
+                    Desde el hogar hasta la industria, tenemos una solución de limpieza para cada desafío. Explora nuestra gama completa y pide la tuya.
+                </p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left mb-12">
+                    <div class="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-xl text-gray-800 dark:text-white transition duration-300">
+                        <h3 class="text-2xl font-bold theme-text-accent mb-2 transition duration-300">Línea Hogar</h3>
+                        <p class="text-gray-600 dark:text-gray-300">Perfecta para el uso diario y la desinfección en ambientes familiares.</p>
+                    </div>
+                    <div class="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-xl text-gray-800 dark:text-white transition duration-300">
+                        <h3 class="text-2xl font-bold theme-text-accent mb-2 transition duration-300">Línea Industrial</h3>
+                        <p class="text-gray-600 dark:text-gray-300">Concentrados y formatos grandes para alto rendimiento en negocios y empresas.</p>
+                    </div>
+                    <div class="bg-white dark:bg-gray-700 p-6 rounded-lg shadow-xl text-gray-800 dark:text-white transition duration-300">
+                        <h3 class="text-2xl font-bold theme-text-accent mb-2 transition duration-300">Línea Verde (Eco)</h3>
+                        <p class="text-gray-600 dark:text-gray-300">Productos biodegradables, pH neutro, libres de tóxicos. Limpieza sostenible.</p>
+                    </div>
+                </div>
+
+                <!-- CTA a WhatsApp en la sección de Líneas -->
+                <a href="https://wa.me/5218180123046?text=Hola%2C%20me%20gustar%C3%ADa%20solicitar%20el%20cat%C3%A1logo%20completo%20de%20l%C3%ADneas%20de%20productos%20Clean%20Up." target="_blank" class="inline-block px-8 py-3 bg-green-500 text-white text-lg font-bold rounded-full hover:bg-green-600 transition duration-300 transform hover:scale-105 shadow-xl">
+                    ¡Pide el Catálogo Completo Aquí!
+                </a>
+            </div>
+        </section>
+
+        <!-- SECCIÓN DE HORARIOS -->
+        <section id="horarios" class="py-16 md:py-24 bg-white dark:bg-gray-800 transition duration-300">
             <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-                <h2 class="text-4xl font-extrabold text-center mb-4 text-gray-800">Solicita tu Cotización</h2>
-                <p class="text-xl text-center text-gray-500 mb-12">
-                    Cuéntanos sobre tus necesidades y te enviaremos una propuesta personalizada en 24 horas.
+                <h2 class="text-4xl font-extrabold text-center mb-4 text-gray-800 dark:text-white">Horario de Envíos y Servicio</h2>
+                <p class="text-xl text-center text-gray-500 dark:text-gray-400 mb-12">
+                    Nuestros envíos a domicilio y servicio de atención al cliente están disponibles en los siguientes horarios.
                 </p>
 
-                <form id="quote-form" class="bg-gray-50 p-8 rounded-xl shadow-2xl border border-gray-100">
-                    <div class="grid md:grid-cols-2 gap-6 mb-6">
-                        <div>
-                            <label for="name" class="block text-sm font-medium text-gray-700 mb-2">Nombre Completo</label>
-                            <input type="text" id="name" name="name" required class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
-                        </div>
-                        <div>
-                            <label for="phone" class="block text-sm font-medium text-gray-700 mb-2">Teléfono</label>
-                            <input type="tel" id="phone" name="phone" required class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
-                        </div>
-                    </div>
-                    <div class="mb-6">
-                        <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Correo Electrónico</label>
-                        <input type="email" id="email" name="email" required class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
-                    </div>
-                    <div class="mb-6">
-                        <label for="service_type" class="block text-sm font-medium text-gray-700 mb-2">Tipo de Servicio Requerido</label>
-                        <select id="service_type" name="service_type" required class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 bg-white appearance-none">
-                            <option value="">Selecciona una opción</option>
-                            <option value="residencial">Limpieza Residencial</option>
-                            <option value="comercial">Limpieza Comercial</option>
-                            <option value="profunda">Limpieza Profunda / Post-Obra</option>
-                            <option value="otro">Otro</option>
-                        </select>
-                    </div>
-                    <div class="mb-8">
-                        <label for="details" class="block text-sm font-medium text-gray-700 mb-2">Detalles Adicionales (Tamaño, frecuencia, etc.)</label>
-                        <textarea id="details" name="details" rows="4" required class="form-input w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"></textarea>
-                    </div>
+                <div class="overflow-x-auto theme-bg-alt p-6 rounded-xl shadow-2xl border theme-border-accent dark:border-gray-700 transition duration-300">
+                    <table class="min-w-full divide-y divide-blue-200 dark:divide-gray-600">
+                        <thead class="bg-blue-600 dark:bg-gray-900 text-white">
+                            <tr>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-bold uppercase tracking-wider rounded-tl-lg">
+                                    Día
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-bold uppercase tracking-wider rounded-tr-lg">
+                                    Horario de Envío
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-blue-200 dark:divide-gray-600 text-gray-900 dark:text-gray-200">
+                            <!-- Lunes -->
+                            <tr class="hover:bg-blue-100 dark:hover:bg-gray-600 transition duration-150">
+                                <td class="px-6 py-4 whitespace-nowrap font-medium">Lunes</td>
+                                <td class="px-6 py-4 whitespace-nowrap">1:30 pm a 4:00 pm</td>
+                            </tr>
+                            <!-- Martes -->
+                            <tr class="bg-blue-50 dark:bg-gray-700 hover:bg-blue-100 dark:hover:bg-gray-600 transition duration-150">
+                                <td class="px-6 py-4 whitespace-nowrap font-medium">Martes</td>
+                                <td class="px-6 py-4 whitespace-nowrap">9:00 am a 4:00 pm</td>
+                            </tr>
+                            <!-- Miércoles -->
+                            <tr class="hover:bg-blue-100 dark:hover:bg-gray-600 transition duration-150">
+                                <td class="px-6 py-4 whitespace-nowrap font-medium">Miércoles</td>
+                                <td class="px-6 py-4 whitespace-nowrap">9:00 am a 4:00 pm</td>
+                            </tr>
+                            <!-- Jueves (Horario Extendido) -->
+                            <tr class="bg-blue-50 dark:bg-gray-700 hover:bg-blue-100 dark:hover:bg-gray-600 transition duration-150 font-bold theme-text-accent">
+                                <td class="px-6 py-4 whitespace-nowrap">Jueves</td>
+                                <td class="px-6 py-4 whitespace-nowrap">9:00 am a 7:00 pm</td>
+                            </tr>
+                            <!-- Viernes -->
+                            <tr class="hover:bg-blue-100 dark:hover:bg-gray-600 transition duration-150">
+                                <td class="px-6 py-4 whitespace-nowrap font-medium">Viernes</td>
+                                <td class="px-6 py-4 whitespace-nowrap">9:00 am a 4:00 pm</td>
+                            </tr>
+                            <!-- Sábado (Entrega solo por la tarde) -->
+                            <tr class="bg-blue-50 dark:bg-gray-700 hover:bg-blue-100 dark:hover:bg-gray-600 transition duration-150">
+                                <td class="px-6 py-4 whitespace-nowrap font-medium">Sábado</td>
+                                <td class="px-6 py-4 whitespace-nowrap">1:30 pm a 4:00 pm</td>
+                            </tr>
+                            <!-- Domingo (Entrega solo por la tarde) -->
+                            <tr class="hover:bg-blue-100 dark:hover:bg-gray-600 transition duration-150">
+                                <td class="px-6 py-4 whitespace-nowrap font-medium">Domingo</td>
+                                <td class="px-6 py-4 whitespace-nowrap">1:30 pm a 6:00 pm</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Sección de Contacto y Cotización (Utiliza la etiqueta #contacto para una navegación más clara) -->
+        <section id="contacto" class="py-16 md:py-24 bg-gray-50 dark:bg-gray-900 transition duration-300">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="text-4xl font-extrabold text-center mb-4 text-gray-800 dark:text-white">Cotizar y Comprar al Instante</h2>
+                <p class="text-xl text-center text-gray-500 dark:text-gray-400 mb-12">
+                    Te responderemos de inmediato. Haz clic para contactarnos por WhatsApp.
+                </p>
+
+                <!-- CTA de WHATSAPP -->
+                <div class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-2xl border border-gray-100 dark:border-gray-700 text-center transition duration-300">
+                    <p class="text-xl text-gray-700 dark:text-gray-200 mb-6 font-semibold">
+                        ¡Estamos listos para surtir tu pedido de limpieza!
+                    </p>
                     
-                    <button type="submit" class="w-full px-4 py-4 bg-blue-600 text-white font-bold text-lg rounded-lg hover:bg-blue-700 transition duration-300 transform hover:scale-[1.01] shadow-xl">
-                        Enviar Solicitud
-                    </button>
-                    
-                    <!-- Contenedor para mensajes del formulario -->
-                    <div id="form-message" class="mt-4 p-4 rounded-lg hidden text-center font-semibold"></div>
-                </form>
+                    <!-- ENLACE A WHATSAPP -->
+                    <a href="https://wa.me/5218180123046?text=Hola%2C%20me%20gustar%C3%ADa%20solicitar%20una%20cotizaci%C3%B3n%20de%20limpieza%20para%20mi%20propiedad.%20%C2%BFPodr%C3%ADan%20ayudarme%3F" target="_blank" class="inline-block w-full md:w-auto px-10 py-4 bg-green-500 text-white font-bold text-xl rounded-lg hover:bg-green-600 transition duration-300 transform hover:scale-[1.02] shadow-xl">
+                        <!-- Icono de WhatsApp (SVG) -->
+                        <svg class="w-6 h-6 inline-block mr-2 -mt-1" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12.039 2C6.549 2 2.158 6.37 2.158 11.838c0 2.21 0.74 4.316 2.158 6.03l-2.07 7.544 7.74-2.016c1.674 0.916 3.593 1.393 5.454 1.393h.001c5.49 0 9.88-4.37 9.88-9.838C21.919 6.37 17.529 2 12.039 2zm5.72 14.156c-0.285 0.71-1.637 1.383-2.28 1.488-0.643 0.106-1.428 0.16-3.811-0.78-4.42-1.776-7.394-6.05-7.584-6.287-0.19-0.236-1.428-1.776-1.428-3.342 0-1.566 0.817-2.35 1.102-2.635 0.285-0.285 0.618-0.34 0.94-0.34 0.323 0 0.505 0.054 0.771 0.638 0.266 0.584 0.916 2.124 0.985 2.261 0.069 0.137 0.11 0.274 0.02 0.44-0.09 0.166-0.19 0.274-0.38 0.478-0.19 0.204-0.41 0.478-0.62 0.73-0.21 0.252-0.42 0.478-0.21 0.83 0.21 0.353 0.67 1.137 1.455 1.867 0.785 0.73 1.569 0.94 1.821 1.066 0.252 0.126 0.418 0.108 0.64 0.02 0.222-0.09 1.137-0.46 1.455-0.916 0.322-0.456 0.548-0.67 0.817-0.67 0.266 0 1.766 0.088 2.051 1.04 0.285 0.952 0.285 1.776 0.19 1.954-0.09 0.178-0.252 0.344-0.478 0.435z" fill="#FFFFFF"/></svg>
+                        Cotizar por WhatsApp Ahora
+                    </a>
+
+                    <p class="mt-6 text-sm text-gray-500 dark:text-gray-400">
+                        También puedes escribirnos a <a href="mailto:clean.upp@outlook.com" class="theme-text-accent hover:underline transition duration-300">clean.upp@outlook.com</a>
+                    </p>
+                </div>
 
             </div>
         </section>
@@ -218,16 +394,155 @@
             <p class="text-xl font-bold mb-4">Clean Up</p>
             <nav class="space-x-4 mb-4">
                 <a href="#inicio" class="text-gray-400 hover:text-white transition duration-300">Inicio</a>
-                <a href="#servicios" class="text-gray-400 hover:text-white transition duration-300">Servicios</a>
+                <a href="#productos-destacados" class="text-gray-400 hover:text-white transition duration-300">Productos</a>
                 <a href="#nosotros" class="text-gray-400 hover:text-white transition duration-300">Nosotros</a>
+                <a href="#lineas" class="text-gray-400 hover:text-white transition duration-300">Líneas</a>
+                <a href="#horarios" class="text-gray-400 hover:text-white transition duration-300">Horarios</a>
                 <a href="#contacto" class="text-gray-400 hover:text-white transition duration-300">Contacto</a>
             </nav>
-            <p class="text-gray-400 text-sm">&copy; 2024 Clean Up. Todos los derechos reservados.</p>
+            <p class="text-gray-400 text-sm">
+                Contacto Email: 
+                <a href="mailto:clean.upp@outlook.com" class="text-blue-400 hover:text-blue-200 transition duration-300">clean.upp@outlook.com</a>
+            </p>
+            <p class="text-gray-400 text-sm mt-1">
+                &copy; 2025 Clean Up. Todos los derechos reservados.
+            </p>
+            <p class="text-gray-500 text-xs mt-1">
+                Desarrollador Web: Ing. Edgar Lomas | Tel: <a href="tel:8123384579" class="hover:text-white">8123384579</a>
+            </p>
         </div>
     </footer>
 
-    <!-- ENLACE AL ARCHIVO JAVASCRIPT EXTERNO -->
-    <script src="script.js"></script>
+    <!-- Bloque de JavaScript (Módulo para Firebase/Autenticación) -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // Variables globales obligatorias proporcionadas por el entorno de Canvas
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        const firebaseConfig = JSON.parse(typeof __firebase_config !== 'undefined' ? __firebase_config : '{}');
+
+        // 1. Inicializar Firebase
+        let app, db, auth;
+        try {
+            app = initializeApp(firebaseConfig);
+            db = getFirestore(app);
+            auth = getAuth(app);
+        } catch (error) {
+            console.error("Error al inicializar Firebase. Asegúrate de que la configuración es correcta:", error);
+        }
+
+        // 2. Autenticación y Obtención de ID de Usuario
+        async function authenticate() {
+            if (!auth) return;
+            try {
+                // Si existe el token, se usa para iniciar sesión
+                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                    await signInWithCustomToken(auth, __initial_auth_token);
+                } else {
+                    // Si no hay token inicial, se inicia sesión de forma anónima
+                    await signInAnonymously(auth);
+                }
+                // Almacena el ID de usuario globalmente para su uso en Firestore (si fuera necesario)
+                window.userId = auth.currentUser?.uid || 'anonymous';
+                console.log("Autenticación exitosa. User ID:", window.userId);
+
+            } catch (error) {
+                console.error("Error de autenticación de Firebase:", error);
+                window.userId = 'guest-auth-failed';
+            }
+        }
+
+        // Se llama a la autenticación
+        authenticate();
+
+    </script>
+    
+    <!-- Bloque de JavaScript (Lógica de la UI y Cambio de Tema) -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const themeToggle = document.getElementById('theme-toggle');
+            const themeIcon = document.getElementById('theme-icon');
+            const htmlElement = document.documentElement; // El elemento <html> para aplicar la clase 'dark'
+
+            // --- Lógica de Menú Móvil ---
+            if (mobileMenuButton && mobileMenu) {
+                mobileMenuButton.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('hidden');
+                });
+                const mobileLinks = mobileMenu.querySelectorAll('a');
+                mobileLinks.forEach(link => {
+                    link.addEventListener('click', () => {
+                        if (!mobileMenu.classList.contains('hidden')) {
+                            mobileMenu.classList.add('hidden');
+                        }
+                    });
+                });
+            }
+
+            // --- Lógica de Cambio de Tema (Nueva Funcionalidad) ---
+
+            /**
+             * Cambia el icono del sol por el de la luna y viceversa.
+             * @param {boolean} isDark True si el modo oscuro está activo.
+             */
+            function updateThemeIcon(isDark) {
+                if (themeIcon) {
+                    // SVG para el Sol (Modo Claro)
+                    const sunIcon = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>';
+                    // SVG para la Luna (Modo Oscuro)
+                    const moonIcon = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>';
+
+                    themeIcon.innerHTML = isDark ? moonIcon : sunIcon;
+                }
+            }
+            
+            /**
+             * Aplica el tema guardado o detectado por defecto.
+             */
+            function initializeTheme() {
+                // Comprueba si el tema está guardado en localStorage
+                const savedTheme = localStorage.getItem('theme');
+                // Comprueba si el sistema operativo prefiere el modo oscuro
+                const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+                
+                let isDark = false;
+
+                if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+                    isDark = true;
+                }
+
+                if (isDark) {
+                    htmlElement.classList.add('dark');
+                } else {
+                    htmlElement.classList.remove('dark');
+                }
+                updateThemeIcon(isDark);
+            }
+
+            // Iniciar el tema al cargar
+            initializeTheme();
+
+            if (themeToggle) {
+                themeToggle.addEventListener('click', () => {
+                    // Alternar la clase 'dark' en el elemento <html>
+                    htmlElement.classList.toggle('dark');
+                    
+                    // Comprobar el nuevo estado
+                    const isDark = htmlElement.classList.contains('dark');
+                    
+                    // Guardar la preferencia en localStorage
+                    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+                    
+                    // Actualizar el icono
+                    updateThemeIcon(isDark);
+                });
+            }
+        });
+    </script>
 
 </body>
 </html>
